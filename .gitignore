@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+monorepo_aggregator.log
+monorepo_consolidation_report.txt
+consolidated-monorepo/
+.env
+.env.*
+!.env.example

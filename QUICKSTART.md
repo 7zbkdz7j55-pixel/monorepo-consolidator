@@ -1,4 +1,7 @@
-# Monorepo Consolidation - Quick Start (5 Minutes)
+# Monorepo Consolidator — Quick Start
+
+**B2 Stealthy Solutions** · Free self-hosted tier
+
 
 ## 1. Generate GitHub Token
 
@@ -12,8 +15,8 @@
 ## 2. Clone Templates
 
 ```bash
-git clone <this-repo>
-cd consolidated-monorepo
+git clone https://github.com/7zbkdz7j55-pixel/monorepo-consolidator.git
+cd monorepo-consolidator
 ```
 
 ## 3. Set Environment Variable
@@ -46,8 +49,8 @@ python github_monorepo_aggregator.py --prefix "project-"
 
 ```bash
 mkdir -p .github/workflows
-cp auto-fix.yml .github/workflows/
-cp dependabot.yml .github/
+cp templates/github-actions/auto-fix.yml .github/workflows/
+cp templates/github-actions/dependabot.yml .github/
 git add .github/
 git commit -m "ci: add workflows"
 git push

@@ -1,42 +1,71 @@
 # Monorepo Consolidator
 
-**B2 Stealthy Solutions** — consolidate scattered GitHub repos into one governed monorepo with git subtrees, then layer lint/SAST/Dependabot via GitHub Actions.
+**B2 Stealthy Solutions**
+
+Turn a pile of related GitHub repositories into one governed monorepo — discover by tag or prefix, absorb with git subtrees, then add lint, SAST, and Dependabot scaffolding.
+
+Not a build-system product (Bazel / Nx / Turborepo). This is **consolidation + governance setup**.
+
+---
 
 ## Pricing
 
-| Tier | Price | What you get |
-|------|-------|----------------|
-| **Free (self-hosted)** | $0 | This repo: aggregator script + Actions templates + docs. You run it with your own GitHub token. |
-| **Hosted** | $9/mo | We run discovery + consolidation for you (coming next — Polar checkout). |
-| **Team + API** | $99/mo | Seats, API, team workflows (only after auth/metering are real — not fake SaaS). |
+| Tier | Price | Status | What you get |
+|------|-------|--------|----------------|
+| **Free · self-hosted** | $0 | **Live** | This package. You run the aggregator with your own GitHub token. |
+| **Hosted** | $9 / month | Coming | We run discovery and consolidation for you. Polar checkout when ready. |
+| **Team + API** | $99 / month | Planned | Seats and API after auth and metering are real. No fake SaaS. |
 
-Polar is the intended merchant of record for paid tiers. Free tier never collects cards.
+Paid tiers will use **Polar** as merchant of record. The free tier never collects card numbers.
 
-## Quick start (Free)
+---
 
-See [QUICKSTART.md](./QUICKSTART.md) and [MONOREPO_SETUP_GUIDE.md](./MONOREPO_SETUP_GUIDE.md).
+## What’s in the box
+
+| Path | Purpose |
+|------|---------|
+| `github_monorepo_aggregator.py` | Discover repos and consolidate with git subtrees |
+| `templates/github-actions/auto-fix.yml` | Lint / format / security-oriented CI template |
+| `templates/github-actions/dependabot.yml` | Weekly Dependabot config template |
+| `QUICKSTART.md` | Five-minute path |
+| `MONOREPO_SETUP_GUIDE.md` | Full setup, tokens, branch protection |
+
+---
+
+## Quick start
 
 ```bash
-export GITHUB_TOKEN=ghp_xxxx   # repo, workflow, read:org
-pip install PyGithub==2.1.1 requests==2.31.0
-python github_monorepo_aggregator.py --tag claude-generated
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+export GITHUB_TOKEN=ghp_xxxx   # scopes: repo, workflow, read:org — rotate every 90 days
+python github_monorepo_aggregator.py --help
 ```
 
-## What’s included
+Copy CI templates into your new monorepo:
 
-- `github_monorepo_aggregator.py` — discover repos by tag/prefix, subtree into a monorepo
-- `.github/workflows/auto-fix.yml` — lint/format + security-oriented CI
-- Docs for branch protection and Dependabot
+```bash
+mkdir -p .github/workflows
+cp templates/github-actions/auto-fix.yml .github/workflows/
+cp templates/github-actions/dependabot.yml .github/
+```
+
+Details: [QUICKSTART.md](./QUICKSTART.md) · [MONOREPO_SETUP_GUIDE.md](./MONOREPO_SETUP_GUIDE.md)
+
+---
 
 ## Honest limits
 
-- Needs a GitHub PAT with repo access — treat tokens like secrets; rotate every 90 days
-- Git subtree consolidation can be slow/large; start with a small tag/prefix filter
-- Hosted/$99 tiers are **not** live until Polar products + a real hosted runner exist
-- Not a Bazel/Nx replacement — this is **repo consolidation + governance scaffolding**
+- Requires a GitHub personal access token with repo access. Treat it like a secret.
+- Subtree consolidations can be large and slow — start with a tight tag or prefix filter.
+- Hosted and Team + API are **not** checkout-live until Polar products and a real hosted runner exist.
+- Does not replace monorepo *build* tools; it consolidates repos and lays down governance scaffolding.
+
+---
 
 ## Support
 
-support@b2stealthysolutions.com
+support@b2stealthysolutions.com  
+
+https://www.b2stealthysolutions.com/monorepo-consolidator
 
 © B2 Stealthy Solutions
